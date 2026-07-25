@@ -76,9 +76,11 @@
     /* === FLIP CARD === */
     .flip-card { perspective:1200px; }
     .flip-card-inner { transition:transform .8s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
-    /* Hover on desktop, touch active on mobile */
+    /* Hover on desktop, touch active on mobile via focus-within */
     .flip-card:hover .flip-card-inner,
-    .flip-card:focus-within .flip-card-inner { transform:rotateY(180deg); }
+    .flip-card:focus .flip-card-inner,
+    .flip-card:focus-within .flip-card-inner { transform:rotateY(180deg); outline:none; }
+    .flip-card:focus { outline: none; }
     .flip-card-front,.flip-card-back { -webkit-backface-visibility:hidden; backface-visibility:hidden; }
     .flip-card-back { transform:rotateY(180deg); }
     /* Bubbles hidden on small screens for performance */

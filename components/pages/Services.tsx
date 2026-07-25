@@ -36,6 +36,15 @@ const Services: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const filteredServices = activeCategory === "All" ? allServices : allServices.filter(s => s.category === activeCategory);
 
+  // Re-trigger reveal animation every time category changes
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    // Small delay so new cards mount, then mark all visible
+    setTimeout(() => {
+      document.querySelectorAll(".svc-card").forEach(el => el.classList.add("visible"));
+    }, 50);
+  };
+
   return (
     <div className="w-full py-20 relative overflow-hidden">
       {/* Animated background elements */}
@@ -80,7 +89,7 @@ const Services: React.FC = () => {
         {/* Category Filter Pills */}
         <div className="flex flex-wrap justify-center gap-3 mb-12 reveal">
           {categories.map(cat => (
-            <button key={cat} onClick={() => setActiveCategory(cat)}
+            <button key={cat} onClick={() => handleCategoryChange(cat)}
               className={`px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 border-2 ${
                 activeCategory === cat
                   ? "text-white border-transparent shadow-[0_4px_20px_rgba(199,21,133,0.4)] scale-105 -translate-y-0.5"
@@ -94,10 +103,13 @@ const Services: React.FC = () => {
 
         {/* 3D Flip Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredServices.map((service, idx) => {
+          {filteredServices.map((service) => {
             const grad = categoryGradients[service.category] || "from-pink-400 to-accent";
+            // Unique key = category+name ensures React fully remounts when switching filters
+            const cardKey = `${service.category}-${service.name}`;
             return (
-              <div key={idx} className="flip-card h-64 cursor-pointer reveal" style={{ transitionDelay: `${(idx % 8) * 50}ms` }}>
+              // tabIndex makes card focusable so focus-within triggers flip on mobile tap
+              <div key={cardKey} tabIndex={0} className="flip-card h-64 cursor-pointer svc-card reveal visible">
                 <div className="flip-card-inner w-full h-full relative rounded-3xl">
 
                   {/* FRONT */}
@@ -108,11 +120,11 @@ const Services: React.FC = () => {
                     <div className="absolute inset-[2px] bg-white/90 backdrop-blur-xl rounded-[1.35rem]"></div>
                     
                     <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
-                      <div className="text-4xl mb-4" style={{ animation:"float-y 4s ease-in-out infinite", animationDelay:`${idx*0.2}s` }}>{service.icon}</div>
+                      <div className="text-4xl mb-4" style={{ animation:"float-y 4s ease-in-out infinite" }}>{service.icon}</div>
                       <div className={`text-xs font-bold tracking-[0.2em] uppercase mb-3 text-transparent bg-clip-text bg-gradient-to-r ${grad}`}>{service.category}</div>
                       <h3 className="text-xl font-serif text-dark font-bold leading-tight">{service.name}</h3>
                       <div className={`mt-4 h-1 w-12 rounded-full bg-gradient-to-r ${grad}`}></div>
-                      <p className="text-[10px] uppercase tracking-widest text-dark/40 mt-4 font-bold">Hover to explore →</p>
+                      <p className="text-[10px] uppercase tracking-widest text-dark/40 mt-4 font-bold">Tap to explore →</p>
                     </div>
                   </div>
 
@@ -130,9 +142,9 @@ const Services: React.FC = () => {
                       <div className="text-3xl mb-3 opacity-90">{service.icon}</div>
                       <h3 className="text-xl font-serif text-white font-bold mb-3 drop-shadow-md">{service.name}</h3>
                       <p className="text-white/90 text-sm leading-relaxed mb-5 drop-shadow-sm font-medium">{service.desc}</p>
-                      <button className="px-5 py-2 bg-white/20 hover:bg-white text-white hover:text-accent rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-300 backdrop-blur-sm shadow-lg">
+                      <a href="https://wa.me/917738232436" target="_blank" rel="noreferrer" className="px-5 py-2 bg-white/20 hover:bg-white text-white hover:text-accent rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-300 backdrop-blur-sm shadow-lg">
                         Book Now
-                      </button>
+                      </a>
                     </div>
                   </div>
 
