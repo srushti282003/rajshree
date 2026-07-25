@@ -15,10 +15,11 @@ const Hero: React.FC = () => {
   const isAnimatingRef = useRef(true);
 
   // --- CONFIGURATION ---
+  const isMobile = window.innerWidth < 768;
   const TUNNEL_WIDTH = 24;
   const TUNNEL_HEIGHT = 16;
   const SEGMENT_DEPTH = 6;
-  const NUM_SEGMENTS = 14; 
+  const NUM_SEGMENTS = isMobile ? 8 : 14;   // Fewer segments on mobile = no lag
   const FOG_DENSITY = 0.02;
 
   const FLOOR_COLS = 6;
@@ -149,12 +150,13 @@ const Hero: React.FC = () => {
 
     const renderer = new THREE.WebGLRenderer({ 
       canvas: canvasRef.current, 
-      antialias: true,
+      antialias: !isMobile,   // antialias off on mobile saves significant GPU
       alpha: false,
       powerPreference: "high-performance"
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Cap pixel ratio at 1 on mobile to halve fill-rate load
+    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
     rendererRef.current = renderer;
 
     const segments: THREE.Group[] = [];
@@ -248,12 +250,12 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        <div ref={contentRef} className="text-center flex flex-col items-center p-12 bg-white/40 backdrop-blur-md rounded-full shadow-[0_0_50px_rgba(255,105,180,0.2)] border border-primary/20 pointer-events-auto mix-blend-multiply-normal"> 
-          <span className="font-serif italic text-4xl mb-4 text-accent">Welcome to</span>
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-2 text-dark font-serif">
+      <div ref={contentRef} className="text-center flex flex-col items-center px-8 py-8 md:p-12 bg-white/40 backdrop-blur-md rounded-full shadow-[0_0_50px_rgba(255,105,180,0.2)] border border-primary/20 pointer-events-auto mix-blend-multiply-normal">
+          <span className="font-serif italic text-2xl md:text-4xl mb-3 text-accent">Welcome to</span>
+          <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-2 text-dark font-serif">
             Rajashree
           </h1>
-          <h2 className="text-2xl md:text-3xl text-secondary tracking-widest uppercase">Salon</h2>
+          <h2 className="text-xl md:text-3xl text-secondary tracking-widest uppercase">Salon</h2>
         </div>
       </div>
     </div>

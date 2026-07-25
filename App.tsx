@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "./components/Navigation";
+import Hero from "./components/Hero";
 import Home from "./components/pages/Home";
 import Services from "./components/pages/Services";
 import About from "./components/pages/About";
@@ -12,17 +13,24 @@ const bubbles = [
 ];
 
 const App: React.FC = () => {
-  // Reveal on scroll
+  const [showTunnel, setShowTunnel] = useState(true);
+
   useEffect(() => {
+    const timer = setTimeout(() => setShowTunnel(false), 5200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Reveal on scroll - starts after tunnel exits
+  useEffect(() => {
+    if (showTunnel) return;
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
       { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
     const attach = () => document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-    // Small delay so DOM is ready
     const t = setTimeout(attach, 200);
     return () => { clearTimeout(t); observer.disconnect(); };
-  }, []);
+  }, [showTunnel]);
 
   const WaveDivider = ({ flip = false, fill = "#fce4f3" }) => (
     <div className="w-full overflow-hidden relative z-20" style={{ lineHeight: 0, marginTop: -1, marginBottom: -1 }}>
@@ -44,8 +52,13 @@ const App: React.FC = () => {
 
       <Navigation />
 
+      {/* 3D Tunnel Loader */}
+      <div className={`fixed inset-0 z-50 pointer-events-none transition-all duration-[2500ms] ease-in-out ${showTunnel ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}>
+        {showTunnel && <Hero />}
+      </div>
+
       {/* Content */}
-      <main className="relative z-10 w-full">
+      <main className={`relative z-10 w-full transition-opacity duration-1000 ${showTunnel ? "opacity-0" : "opacity-100"}`}>
 
         <div id="home"><Home /></div>
 
