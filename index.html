@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rajashree Salon — Where Beauty Meets Expertise | Thane</title>
+  <meta name="description" content="Premium beauty salon in Thane. 10+ years of expertise in facials, waxing, makeup, spa and more." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", sans-serif; background: #FFFDFD; color: #1A1A1A; overflow-x: hidden; }
+    h1,h2,h3,h4,h5,h6,.font-serif { font-family: "Playfair Display", serif; }
+    ::selection { background: rgba(255,192,203,0.5); color: #C71585; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(#FFC0CB, #C71585); border-radius: 5px; }
+
+    /* === FLOATING BUBBLES === */
+    .bubble { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; animation: bubble-float linear infinite; }
+    .bubble-inner { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,192,203,0.15)); box-shadow: 0 0 20px rgba(255,105,180,0.1), inset 0 0 20px rgba(255,255,255,0.4); animation: bubble-drift ease-in-out infinite alternate; }
+    @keyframes bubble-float { 0%{transform:translateY(110vh) scale(0.3);opacity:0} 10%{opacity:.5} 90%{opacity:.25} 100%{transform:translateY(-10vh) scale(1.2);opacity:0} }
+    @keyframes bubble-drift { 0%{transform:translateX(0) rotate(0deg)} 100%{transform:translateX(25px) rotate(10deg)} }
+
+    /* === ANIMATIONS === */
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    @keyframes pulse-ring { 0%{transform:scale(1);opacity:0.7} 100%{transform:scale(1.6);opacity:0} }
+    @keyframes shimmer-x { 0%{background-position:200% center} 100%{background-position:-200% center} }
+    @keyframes gradient-shift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+    @keyframes petal-fall { 0%{transform:translateY(-60px) rotate(0deg) translateX(0);opacity:0} 15%{opacity:.8} 85%{opacity:.4} 100%{transform:translateY(105vh) rotate(720deg) translateX(60px);opacity:0} }
+    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    @keyframes card-reveal { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes border-rotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+    @keyframes sparkle-pop { 0%,100%{opacity:0;transform:scale(0) rotate(0deg)} 40%,60%{opacity:1;transform:scale(1) rotate(180deg)} }
+    @keyframes wave-line { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(2)} }
+    @keyframes morph { 0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%} 50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%} }
+
+    /* === SECTION BACKGROUNDS === */
+    .section-home { position:relative; overflow:hidden; background:linear-gradient(160deg,#fff8fb 0%,#ffe8f2 40%,#ffd5e8 100%); }
+    .section-services { position:relative; overflow:hidden; background:linear-gradient(135deg,#fdf5ff 0%,#fce0f5 35%,#f5d5ff 70%,#fde8ff 100%); }
+    .section-about { position:relative; overflow:hidden; background:linear-gradient(180deg,#fff5f8 0%,#ffeef6 40%,#ffe0f0 100%); }
+    .section-gallery { position:relative; overflow:hidden; background:linear-gradient(135deg,#f8f5ff 0%,#fce0f5 40%,#ffe5ee 100%); }
+    .section-contact { position:relative; overflow:hidden; background:linear-gradient(160deg,#fff0f7 0%,#ffdde9 45%,#ffe8f5 100%); }
+
+    /* === MESH GRADIENTS (animated) === */
+    .mesh-bg { position:absolute; inset:0; pointer-events:none; z-index:0; }
+    .mesh-bg::before { content:''; position:absolute; width:60%; height:60%; border-radius:50%; filter:blur(80px); top:-10%; right:-10%; background:radial-gradient(circle,rgba(255,182,193,0.55),transparent 70%); animation:float-y 8s ease-in-out infinite; }
+    .mesh-bg::after { content:''; position:absolute; width:50%; height:50%; border-radius:50%; filter:blur(70px); bottom:-10%; left:-10%; background:radial-gradient(circle,rgba(199,21,133,0.18),transparent 70%); animation:float-y 11s ease-in-out infinite reverse; }
+    .mesh-orb { position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none; }
+
+    /* === DOT GRID === */
+    .dot-grid { background-image:radial-gradient(rgba(199,21,133,0.12) 1.5px, transparent 1.5px); background-size:28px 28px; }
+
+    /* === PETAL === */
+    .petal { position:absolute; border-radius:60% 40% 60% 40%; pointer-events:none; animation:petal-fall linear infinite; }
+
+    /* === MARQUEE TICKER === */
+    .marquee-track { display:flex; gap:0; animation:marquee linear infinite; width:max-content; }
+    .marquee-wrap { overflow:hidden; position:relative; }
+    .marquee-wrap::before,.marquee-wrap::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none; }
+    .marquee-wrap::before { left:0; background:linear-gradient(to right,rgba(26,26,26,1),transparent); }
+    .marquee-wrap::after { right:0; background:linear-gradient(to left,rgba(26,26,26,1),transparent); }
+
+    /* === SPARKLE STARS === */
+    .sparkle { position:absolute; pointer-events:none; animation:sparkle-pop ease-in-out infinite; }
+
+    /* === GLOW BUTTON === */
+    .btn-glow { position:relative; z-index:1; }
+    .btn-glow::before { content:''; position:absolute; inset:-4px; background:linear-gradient(45deg,#FFC0CB,#FF69B4,#C71585,#8B008B,#C71585,#FF69B4,#FFC0CB); background-size:400%; z-index:-1; filter:blur(14px); opacity:0; transition:opacity .35s; border-radius:inherit; animation:gradient-shift 4s ease infinite; }
+    .btn-glow:hover::before { opacity:1; }
+
+    /* === FLIP CARD === */
+    .flip-card { perspective:1200px; }
+    .flip-card-inner { transition:transform .8s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
+    .flip-card:hover .flip-card-inner { transform:rotateY(180deg); }
+    .flip-card-front,.flip-card-back { -webkit-backface-visibility:hidden; backface-visibility:hidden; }
+    .flip-card-back { transform:rotateY(180deg); }
+
+    /* === REVEAL === */
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* === STACKING STICKY CARDS === */
+    .sticky-card { position:sticky; will-change:transform; }
+
+    /* === SHIMMER TEXT === */
+    .shimmer-text { background:linear-gradient(120deg,#C71585 0%,#FF69B4 30%,#C71585 60%,#FF69B4 100%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer-x 4s linear infinite; }
+
+    /* === GLASS CARD === */
+    .glass { background:rgba(255,255,255,0.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,192,203,0.4); }
+
+    /* === MORPHING SHAPE === */
+    .morph-shape { animation:morph 8s ease-in-out infinite; }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:"#FFC0CB", secondary:"#FF69B4", accent:"#C71585", magenta:"#8B008B",
+            dark:"#1A1A1A", light:"#FFFDFD",
+            babyGreen:"#E0F8E8", babyPurple:"#F4E6FF", babyGray:"#F5F5F5", babyBrown:"#D2B48C", babyBlue:"#E6F0FA"
+          },
+          fontFamily: { sans:["Inter","sans-serif"], serif:["Playfair Display","serif"] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
