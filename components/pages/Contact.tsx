@@ -1,9 +1,9 @@
-﻿import React from "react";
-import { Phone, Mail, Clock } from "lucide-react";
+import React from "react";
+import { Phone, Mail } from "lucide-react";
 
 const Contact: React.FC = () => {
   return (
-    <div className="w-full py-28 relative overflow-hidden">
+    <div className="w-full py-16 md:py-28 relative overflow-hidden">
       {/* Animated background */}
       <div className="orb orb-1"></div>
       <div className="orb orb-2"></div>
@@ -64,16 +64,6 @@ const Contact: React.FC = () => {
                 </div>
               </a>
 
-              <div className="flex items-center gap-5 group">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white flex-shrink-0 shadow-lg" style={{ background:"linear-gradient(135deg,#d48fb0,#8B008B)" }}>
-                  <Clock size={28} />
-                </div>
-                <div>
-                  <p className="text-xs text-dark/40 uppercase tracking-widest mb-0.5 font-semibold">Working Hours</p>
-                  <p className="text-xl font-serif text-dark font-bold">Mon – Sun</p>
-                  <p className="text-accent font-semibold">10:00 AM – 8:00 PM</p>
-                </div>
-              </div>
             </div>
 
             {/* Booking Buttons */}

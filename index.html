@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: "Inter", sans-serif; background: #FFFDFD; color: #1A1A1A; overflow-x: hidden; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: "Inter", sans-serif; background: #FFFDFD; color: #1A1A1A; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
     h1,h2,h3,h4,h5,h6,.font-serif { font-family: "Playfair Display", serif; }
     ::selection { background: rgba(255,192,203,0.5); color: #C71585; }
     ::-webkit-scrollbar { width: 5px; }
@@ -76,9 +76,13 @@
     /* === FLIP CARD === */
     .flip-card { perspective:1200px; }
     .flip-card-inner { transition:transform .8s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
-    .flip-card:hover .flip-card-inner { transform:rotateY(180deg); }
+    /* Hover on desktop, touch active on mobile */
+    .flip-card:hover .flip-card-inner,
+    .flip-card:focus-within .flip-card-inner { transform:rotateY(180deg); }
     .flip-card-front,.flip-card-back { -webkit-backface-visibility:hidden; backface-visibility:hidden; }
     .flip-card-back { transform:rotateY(180deg); }
+    /* Bubbles hidden on small screens for performance */
+    @media (max-width: 640px) { .bubble { display: none; } }
 
     /* === REVEAL === */
     .reveal { opacity:0; transform:translateY(32px); transition:opacity .75s ease, transform .75s ease; }
