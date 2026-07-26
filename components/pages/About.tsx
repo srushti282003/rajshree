@@ -1,4 +1,6 @@
 import React from "react";
+// Direct Vite asset import — guaranteed to work on every device and deployment
+import rajashreePhoto from "/assets/RAJSHRRE.jpeg";
 
 const whyCards = [
   { id: 1, icon: "🧼", title: "Strict Hygiene", desc: "Highest standards of cleanliness. Every tool is sterilized, every surface sanitized.", bg: "linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,228,240,0.75))", accent: "#C71585", span: "md:col-span-2 md:row-span-2", img: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=800&fit=crop" },
@@ -121,11 +123,10 @@ const About: React.FC = () => {
                 <div className="absolute inset-0 rounded-[2rem]"
                   style={{ background: "radial-gradient(ellipse at 60% 40%, rgba(255,105,180,0.25) 0%, transparent 70%)" }} />
 
-                {/* Main image */}
+                {/* Main image — uses Vite-imported asset URL, works on all devices */}
                 <img
-                  src="/RAJSHRRE.jpeg"
+                  src={rajashreePhoto}
                   alt="Rajashree — Founder"
-                  onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=700&fit=crop"; }}
                   className="relative z-10 w-full aspect-[4/5] object-cover object-top shadow-2xl border-4 border-white"
                   style={{ borderRadius: "2rem" }}
                   loading="eager"
