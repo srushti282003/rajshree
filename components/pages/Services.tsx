@@ -142,9 +142,7 @@ const Services: React.FC = () => {
                       <div className="text-3xl mb-3 opacity-90">{service.icon}</div>
                       <h3 className="text-xl font-serif text-white font-bold mb-3 drop-shadow-md">{service.name}</h3>
                       <p className="text-white/90 text-sm leading-relaxed mb-5 drop-shadow-sm font-medium">{service.desc}</p>
-                      <a href="https://wa.me/917738232436" target="_blank" rel="noreferrer" className="px-5 py-2 bg-white/20 hover:bg-white text-white hover:text-accent rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-300 backdrop-blur-sm shadow-lg">
-                        Book Now
-                      </a>
+
                     </div>
                   </div>
 
